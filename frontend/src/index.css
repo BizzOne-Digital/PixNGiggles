@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #000000;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-light: #2d2d2d;
+  --color-gold: #c59d5f;
+  --color-gold-dark: #a67c4a;
+  --color-gold-light: #d4b483;
+  --color-cream: #f5f0e8;
+  --color-gray-light: #f3f3f3;
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
+  --font-script: "Great Vibes", cursive;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased text-charcoal bg-white;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .font-script {
+    font-family: var(--font-script);
+  }
+
+  .text-gradient-gold {
+    @apply text-gold;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-bold uppercase tracking-wide text-black transition-all duration-300 hover:bg-gold-light focus:outline-none focus:ring-2 focus:ring-gold disabled:opacity-50;
+  }
+
+  .btn-primary-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-black px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-charcoal focus:outline-none disabled:opacity-50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border-2 border-gold bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-gold hover:text-black focus:outline-none;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border-2 border-black bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-black transition-all duration-300 hover:bg-black hover:text-white focus:outline-none;
+  }
+
+  .btn-phone {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-black transition-all hover:bg-gold-light;
+  }
+
+  .section-padding {
+    @apply px-4 py-14 sm:px-6 lg:px-8 lg:py-20;
+  }
+
+  .container-custom {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .card-premium {
+    @apply rounded-lg bg-white shadow-md transition-all duration-300;
+  }
+
+  .input-field {
+    @apply w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-charcoal placeholder-gray-400 transition-colors focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold;
+  }
+
+  .label-field {
+    @apply mb-1 block text-sm font-semibold text-charcoal;
+  }
+
+  /* Admin panel — dark cards & readable text */
+  .admin-panel .card-premium {
+    @apply rounded-lg border border-white/10 bg-charcoal-light shadow-lg;
+  }
+
+  .admin-panel .label-field {
+    @apply text-white/85;
+  }
+
+  .admin-panel .input-field {
+    @apply border-white/20 bg-charcoal text-white placeholder-white/40;
+  }
+
+  .admin-panel .text-charcoal {
+    @apply text-white;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.skeleton {
+  @apply rounded bg-gray-200;
+}

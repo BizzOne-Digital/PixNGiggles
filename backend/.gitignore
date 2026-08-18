@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment — keep .env.example for reference
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build / deploy
+dist/
+.vercel/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Test
+coverage/
