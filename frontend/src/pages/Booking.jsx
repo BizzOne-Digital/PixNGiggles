@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { PhoneIcon, EnvelopeIcon, ClockIcon } from '@heroicons/react/24/outline';
 import SEO from '../components/common/SEO';
-import SectionHeading from '../components/common/SectionHeading';
+import PageHero from '../components/common/PageHero';
+import ProcessSteps from '../components/common/ProcessSteps';
+import WhatsIncluded from '../components/common/WhatsIncluded';
+import FAQSection from '../components/common/FAQSection';
 import { bookingsAPI, addonsAPI } from '../services/api';
 import { EVENT_TYPES, BOOTH_OPTIONS, HEAR_ABOUT_OPTIONS } from '../utils/constants';
+import { useSettings } from '../context/SettingsContext';
 
 export const BookingForm = ({ className = '' }) => {
   const [addons, setAddons] = useState([]);
@@ -153,24 +159,97 @@ export const BookingForm = ({ className = '' }) => {
   );
 };
 
-const Booking = () => (
-  <>
-    <SEO title="Book Your Event" description="Submit a booking inquiry for your Dallas–Fort Worth photo booth rental." />
-    <section className="bg-gray-light section-padding !pt-28">
-      <div className="container-custom">
-        <SectionHeading
-          eyebrow="Booking"
-          title="Book Your Photo Booth"
-          subtitle="Fill out the form below and our team will get back to you within 24 hours with availability and pricing."
-        />
-        <div className="mx-auto max-w-3xl">
-          <div className="card-premium p-6 sm:p-8">
-            <BookingForm />
+const Booking = () => {
+  const { settings } = useSettings();
+
+  return (
+    <>
+      <SEO title="Book Your Event" description="Submit a booking inquiry for your Dallas–Fort Worth photo booth rental." />
+      <PageHero
+        eyebrow="Booking"
+        title="Book Your"
+        scriptSuffix="Photo Booth"
+        subtitle="Fill out the form below and our team will get back to you within 24 hours with availability and pricing."
+      />
+
+      <section className="bg-black py-6">
+        <div className="container-custom flex flex-wrap items-center justify-center gap-6 text-sm text-white">
+          <a href={`tel:${settings.phone}`} className="flex items-center gap-2 hover:text-gold">
+            <PhoneIcon className="h-5 w-5 text-gold" />
+            {settings.phone}
+          </a>
+          <a href={`mailto:${settings.email}`} className="flex items-center gap-2 hover:text-gold">
+            <EnvelopeIcon className="h-5 w-5 text-gold" />
+            {settings.email}
+          </a>
+          <span className="flex items-center gap-2">
+            <ClockIcon className="h-5 w-5 text-gold" />
+            Response within 24 hours
+          </span>
+        </div>
+      </section>
+
+      <section className="bg-gray-light section-padding">
+        <div className="container-custom grid gap-12 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <div className="card-premium p-6 sm:p-8">
+              <h2 className="text-xl font-bold text-charcoal">Booking Inquiry Form</h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Tell us about your event and we&apos;ll send a custom quote with package options.
+              </p>
+              <div className="mt-6">
+                <BookingForm />
+              </div>
+            </div>
+          </div>
+          <div className="lg:col-span-2 space-y-6">
+            <div className="card-premium p-6">
+              <h3 className="font-bold text-charcoal">Why Book With Us?</h3>
+              <ul className="mt-4 space-y-3 text-sm text-gray-600">
+                <li>✓ Premium Cloee & Mirror X booths</li>
+                <li>✓ Professional on-site attendants</li>
+                <li>✓ Unlimited photo sessions</li>
+                <li>✓ Instant digital sharing</li>
+                <li>✓ Custom overlays & backdrops</li>
+                <li>✓ Serving all of DFW</li>
+              </ul>
+            </div>
+            <div className="card-premium p-6">
+              <h3 className="font-bold text-charcoal">Prefer to Talk?</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Call or email us directly — we&apos;re happy to walk through options and answer questions.
+              </p>
+              <div className="mt-4 space-y-2">
+                <a href={`tel:${settings.phone}`} className="block text-sm font-semibold text-gold hover:underline">
+                  {settings.phone}
+                </a>
+                <a href={`mailto:${settings.email}`} className="block text-sm font-semibold text-gold hover:underline">
+                  {settings.email}
+                </a>
+              </div>
+              <Link to="/contact" className="btn-outline-dark mt-4 inline-flex text-xs">
+                Contact Page
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </>
-);
+      </section>
+
+      <ProcessSteps bg="white" />
+      <WhatsIncluded bg="gray" />
+      <FAQSection limit={5} bg="white" title="Booking Questions" />
+
+      <section className="bg-gold">
+        <div className="container-custom flex flex-col items-center justify-between gap-6 px-4 py-8 sm:flex-row sm:px-6 lg:px-8">
+          <div className="text-black text-center sm:text-left">
+            <h2 className="text-xl font-extrabold sm:text-2xl">Questions Before You Book?</h2>
+            <p className="mt-1 text-sm font-medium">Our team is ready to help plan your perfect photo booth experience.</p>
+          </div>
+          <Link to="/contact" className="btn-primary-dark shrink-0">Contact Us</Link>
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default Booking;

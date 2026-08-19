@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import { getImageUrl } from '../../utils/helpers';
 
-const LazyImage = ({ src, alt, className = '', width = 800, ...props }) => {
+const LazyImage = ({ src, alt, className = '', width = 1200, sizes, ...props }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
   const imageUrl = typeof src === 'object' ? getImageUrl(src, width) : src;
 
   if (!imageUrl || error) {
-    return (
-      <div className={`skeleton ${className}`} />
-    );
+    return <div className={`skeleton ${className}`} />;
   }
 
   return (
@@ -21,6 +19,8 @@ const LazyImage = ({ src, alt, className = '', width = 800, ...props }) => {
       onLoad={() => setLoaded(true)}
       onError={() => setError(true)}
       loading="lazy"
+      decoding="async"
+      sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
       {...props}
     />
   );

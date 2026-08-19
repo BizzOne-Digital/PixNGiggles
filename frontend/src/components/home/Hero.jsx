@@ -18,9 +18,12 @@ const Hero = () => {
 
   return (
     <section className="relative flex h-screen min-h-[600px] flex-col overflow-hidden bg-black">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/hero.png)' }}
+      <img
+        src="/images/hero.png"
+        alt="PixNGiggles photo booth at a Dallas event"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+        fetchPriority="high"
+        decoding="async"
       />
       <div className="absolute inset-0 bg-black/45" />
 

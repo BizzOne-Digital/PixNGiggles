@@ -1,23 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { PhoneIcon, EnvelopeIcon, GlobeAltIcon, MapPinIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
-import SEO from '../components/common/SEO';
-import SectionHeading, { CTASection } from '../components/common/SectionHeading';
-import { contactsAPI, faqsAPI } from '../services/api';
-import { useSettings } from '../context/SettingsContext';
 import { Link } from 'react-router-dom';
+import {
+  PhoneIcon,
+  EnvelopeIcon,
+  GlobeAltIcon,
+  MapPinIcon,
+  ClockIcon,
+} from '@heroicons/react/24/outline';
+import SEO from '../components/common/SEO';
+import PageHero from '../components/common/PageHero';
+import ProcessSteps from '../components/common/ProcessSteps';
+import ServiceAreaSection from '../components/common/ServiceAreaSection';
+import FAQSection from '../components/common/FAQSection';
+import TestimonialsSection from '../components/common/TestimonialsSection';
+import { CTASection } from '../components/common/SectionHeading';
+import SectionHeading from '../components/common/SectionHeading';
+import { contactsAPI } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 
 const Contact = () => {
   const { settings } = useSettings();
-  const [faqs, setFaqs] = useState([]);
-  const [openFaq, setOpenFaq] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
-  useEffect(() => {
-    faqsAPI.getAll().then(({ data }) => setFaqs(data.data.slice(0, 5))).catch(console.error);
-  }, []);
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -37,13 +43,33 @@ const Contact = () => {
   return (
     <>
       <SEO title="Contact Us" description="Contact PixNGiggles for photo booth rentals in Dallas–Fort Worth." />
-      <section className="bg-white section-padding !pt-28">
-        <div className="container-custom">
-          <SectionHeading eyebrow="Contact" title="Get In Touch" subtitle="We'd love to hear about your event. Reach out and let's create something unforgettable." />
+      <PageHero
+        eyebrow="Contact"
+        title="Get In"
+        scriptSuffix="Touch"
+        subtitle="We'd love to hear about your event. Reach out and let's create something unforgettable."
+      />
 
+      {/* Response promise */}
+      <section className="bg-black py-6">
+        <div className="container-custom flex flex-wrap items-center justify-center gap-8 text-sm text-white">
+          <span className="flex items-center gap-2">
+            <ClockIcon className="h-5 w-5 text-gold" />
+            We respond within 24 hours
+          </span>
+          <span className="flex items-center gap-2">
+            <MapPinIcon className="h-5 w-5 text-gold" />
+            {settings.serviceArea}
+          </span>
+        </div>
+      </section>
+
+      <section className="bg-white section-padding">
+        <div className="container-custom">
           <div className="grid gap-12 lg:grid-cols-5">
             <div className="lg:col-span-2 space-y-6">
               <div className="card-premium p-6 space-y-5">
+                <h3 className="font-bold text-charcoal">Contact Information</h3>
                 <a href={`tel:${settings.phone}`} className="flex items-center gap-4 text-gray-700 hover:text-gold transition-colors">
                   <PhoneIcon className="h-5 w-5 text-gold shrink-0" />
                   <span>{settings.phone}</span>
@@ -76,23 +102,33 @@ const Contact = () => {
                 </div>
               )}
 
-              <Link to="/booking" className="btn-primary block text-center">Book Your Event</Link>
+              <div className="card-premium p-6">
+                <h4 className="font-bold text-charcoal">Quick Links</h4>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link to="/booking" className="btn-primary text-xs">Book Your Event</Link>
+                  <Link to="/services" className="btn-outline-dark text-xs">Our Services</Link>
+                  <Link to="/gallery" className="btn-outline-dark text-xs">View Gallery</Link>
+                </div>
+              </div>
             </div>
 
             <div className="lg:col-span-3">
               <div className="card-premium p-6 sm:p-8">
-                <h3 className="text-xl font-bold text-charcoal mb-6">Send Us a Message</h3>
+                <h3 className="text-xl font-bold text-charcoal mb-2">Send Us a Message</h3>
+                <p className="text-sm text-gray-600 mb-6">
+                  Have a question about packages, booths, or availability? Send us a message and we&apos;ll get back to you promptly.
+                </p>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
                       <label className="label-field">Name *</label>
                       <input className="input-field" {...register('name', { required: 'Name is required' })} />
-                      {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>}
+                      {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
                     </div>
                     <div>
                       <label className="label-field">Email *</label>
                       <input type="email" className="input-field" {...register('email', { required: 'Email is required' })} />
-                      {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>}
+                      {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
                     </div>
                   </div>
                   <div className="grid gap-5 sm:grid-cols-2">
@@ -108,7 +144,7 @@ const Contact = () => {
                   <div>
                     <label className="label-field">Message *</label>
                     <textarea rows={5} className="input-field" {...register('message', { required: 'Message is required' })} />
-                    {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message.message}</p>}
+                    {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
                   </div>
                   <button type="submit" disabled={submitting} className="btn-primary">
                     {submitting ? 'Sending...' : 'Send Message'}
@@ -120,30 +156,27 @@ const Contact = () => {
         </div>
       </section>
 
-      {faqs.length > 0 && (
-        <section className="section-padding bg-gray-light">
-          <div className="container-custom max-w-3xl">
-            <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
-            <div className="space-y-3">
-              {faqs.map((faq, idx) => (
-                <div key={faq._id} className="card-premium overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="flex w-full items-center justify-between p-5 text-left"
-                  >
-                    <span className="font-semibold text-charcoal">{faq.question}</span>
-                    <ChevronDownIcon className={`h-5 w-5 text-gold transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
-                  </button>
-                  {openFaq === idx && (
-                    <div className="border-t border-gray-100 px-5 pb-5 pt-3 text-gray-600">{faq.answer}</div>
-                  )}
-                </div>
-              ))}
-            </div>
+      <section className="section-padding bg-gray-light">
+        <div className="container-custom">
+          <SectionHeading
+            eyebrow="Before You Reach Out"
+            title="What to Include"
+            subtitle="The more details you share, the faster we can help."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {['Event date & time', 'Venue & city', 'Guest count', 'Booth preference'].map((tip) => (
+              <div key={tip} className="card-premium p-5 text-center">
+                <p className="text-sm font-bold text-charcoal">{tip}</p>
+              </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
+      <ProcessSteps bg="white" />
+      <TestimonialsSection limit={3} bg="gray" />
+      <FAQSection bg="white" />
+      <ServiceAreaSection bg="black" />
       <CTASection title="Ready to Book?" primaryText="Check Availability" />
     </>
   );

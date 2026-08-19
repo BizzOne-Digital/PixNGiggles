@@ -1,19 +1,30 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import SEO from '../components/common/SEO';
+import PageHero from '../components/common/PageHero';
+import ProcessSteps from '../components/common/ProcessSteps';
+import WhatsIncluded from '../components/common/WhatsIncluded';
+import TestimonialsSection from '../components/common/TestimonialsSection';
+import FAQSection from '../components/common/FAQSection';
 import { CTASection } from '../components/common/SectionHeading';
+import SectionHeading from '../components/common/SectionHeading';
 import LazyImage from '../components/common/LazyImage';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import { boothsAPI } from '../services/api';
+import { boothsAPI, addonsAPI } from '../services/api';
+import { BOOTH_COMPARISON } from '../utils/pageContent';
 
 const Booths = () => {
   const [booths, setBooths] = useState([]);
+  const [addons, setAddons] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    boothsAPI.getAll()
-      .then(({ data }) => setBooths(data.data))
+    Promise.all([boothsAPI.getAll(), addonsAPI.getAll()])
+      .then(([booth, addon]) => {
+        setBooths(booth.data.data);
+        setAddons(addon.data.data);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
@@ -21,41 +32,44 @@ const Booths = () => {
   return (
     <>
       <SEO title="Photo Booths" description="Explore the Cloee Ring Light and Mirror X Luxury photo booths from PixNGiggles." />
-      <section className="bg-white section-padding !pt-28">
-        <div className="container-custom text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold">Our Booths</p>
-          <h1 className="mt-2 text-2xl font-extrabold text-charcoal sm:text-3xl">
-            Two Great Options, One <span className="font-script text-3xl text-gold">Unforgettable</span> Experience
-          </h1>
-        </div>
-        <div className="container-custom mt-12">
+      <PageHero
+        eyebrow="Our Booths"
+        title="Two Great Options, One"
+        scriptSuffix="Unforgettable Experience"
+        subtitle="Premium Cloee Ring Light and Mirror X Luxury booths — studio-quality photos with a touch of magic."
+      />
+
+      <section className="bg-white section-padding">
+        <div className="container-custom">
           {loading ? (
             <LoadingSpinner className="py-20" />
           ) : (
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
               {booths.map((booth) => (
-                <div key={booth._id} className="flex flex-row items-start gap-5 sm:gap-6">
-                  <div className="shrink-0 w-28 sm:w-32 lg:w-40">
-                    <LazyImage
-                      src={booth.image}
-                      alt={booth.title}
-                      className="h-auto w-full object-contain"
-                      width={500}
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1 text-left">
-                    <h3 className="text-base font-bold leading-snug text-charcoal sm:text-xl">{booth.title}</h3>
-                    <p className="mt-1 text-xs font-semibold text-gold sm:text-sm">By {booth.manufacturer}</p>
-                    <p className="mt-2 text-xs text-gray-600 sm:text-sm">{booth.description}</p>
-                    <ul className="mt-3 space-y-1.5">
-                      {booth.features?.map((f) => (
-                        <li key={f} className="flex items-start gap-2 text-xs text-gray-600 sm:text-sm">
-                          <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link to="/contact" className="btn-primary mt-5 inline-flex text-xs sm:text-sm">Contact for Pricing</Link>
+                <div key={booth._id} className="card-premium overflow-hidden">
+                  <LazyImage
+                    src={booth.image}
+                    alt={booth.title}
+                    className="h-64 w-full object-cover sm:h-72"
+                    width={1000}
+                  />
+                  <div className="p-6 sm:p-8">
+                    <div className="flex flex-row items-start gap-5">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-xl font-bold text-charcoal">{booth.title}</h3>
+                        <p className="mt-1 text-sm font-semibold text-gold">By {booth.manufacturer}</p>
+                        <p className="mt-3 text-sm leading-relaxed text-gray-600">{booth.description}</p>
+                        <ul className="mt-4 space-y-2">
+                          {booth.features?.map((f) => (
+                            <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                              <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                              <span>{f}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Link to="/contact" className="btn-primary mt-6 inline-flex text-sm">Contact for Pricing</Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -63,6 +77,72 @@ const Booths = () => {
           )}
         </div>
       </section>
+
+      {/* Comparison table */}
+      <section className="section-padding bg-gray-light">
+        <div className="container-custom">
+          <SectionHeading
+            eyebrow="Compare"
+            title="Which Booth Is"
+            scriptSuffix="Right for You?"
+            subtitle="Both booths deliver stunning results — here's how they differ."
+          />
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[500px] card-premium text-sm">
+              <thead>
+                <tr className="border-b border-gray-100 bg-black text-left text-white">
+                  <th className="p-4 font-bold">Feature</th>
+                  <th className="p-4 font-bold">Cloee Ring Light</th>
+                  <th className="p-4 font-bold">Mirror X Luxury</th>
+                </tr>
+              </thead>
+              <tbody>
+                {BOOTH_COMPARISON.map((row) => (
+                  <tr key={row.feature} className="border-b border-gray-100">
+                    <td className="p-4 text-charcoal">{row.feature}</td>
+                    <td className="p-4">
+                      {row.cloee ? (
+                        <CheckCircleIcon className="h-5 w-5 text-gold" />
+                      ) : (
+                        <XMarkIcon className="h-5 w-5 text-gray-300" />
+                      )}
+                    </td>
+                    <td className="p-4">
+                      {row.mirror ? (
+                        <CheckCircleIcon className="h-5 w-5 text-gold" />
+                      ) : (
+                        <XMarkIcon className="h-5 w-5 text-gray-300" />
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <WhatsIncluded bg="white" />
+
+      {addons.length > 0 && (
+        <section className="section-padding bg-gray-light">
+          <div className="container-custom">
+            <SectionHeading eyebrow="Customize" title="Booth Add-Ons" subtitle="Pair any booth with premium extras for a fully branded experience." />
+            <div className="grid gap-4 sm:grid-cols-2">
+              {addons.map((addon) => (
+                <div key={addon._id} className="card-premium flex items-center gap-3 p-5">
+                  <CheckCircleIcon className="h-5 w-5 shrink-0 text-gold" />
+                  <span className="font-medium text-charcoal">{addon.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <ProcessSteps bg="white" />
+      <TestimonialsSection limit={3} bg="gray" />
+      <FAQSection limit={4} bg="white" title="Booth Questions" />
       <CTASection title="Not Sure Which Booth Is Right for You?" subtitle="Our team will help you choose the perfect option." />
     </>
   );
