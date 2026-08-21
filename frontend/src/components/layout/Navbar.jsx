@@ -36,7 +36,7 @@ const Navbar = ({ variant = 'default' }) => {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
       <nav className="container-custom flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Logo light />
+        <Logo size="md" />
 
         <div className="hidden items-center gap-8 lg:flex">
           {HEADER_NAV_LINKS.map((link) => (

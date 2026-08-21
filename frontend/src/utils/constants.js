@@ -27,6 +27,7 @@ export const LEAD_STATUSES = [
 export const GALLERY_CATEGORIES = [
   'All',
   'Weddings',
+  'Quinceañeras',
   'Birthdays',
   'Graduations',
   'Corporate Events',

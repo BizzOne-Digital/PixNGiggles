@@ -15,6 +15,7 @@ import ProcessSteps from '../components/common/ProcessSteps';
 import ServiceAreaSection from '../components/common/ServiceAreaSection';
 import FAQSection from '../components/common/FAQSection';
 import TestimonialsSection from '../components/common/TestimonialsSection';
+import { SocialLinksBar } from '../components/common/SocialLinks';
 import { CTASection } from '../components/common/SectionHeading';
 import SectionHeading from '../components/common/SectionHeading';
 import { contactsAPI } from '../services/api';
@@ -52,15 +53,18 @@ const Contact = () => {
 
       {/* Response promise */}
       <section className="bg-black py-6">
-        <div className="container-custom flex flex-wrap items-center justify-center gap-8 text-sm text-white">
-          <span className="flex items-center gap-2">
-            <ClockIcon className="h-5 w-5 text-gold" />
-            We respond within 24 hours
-          </span>
-          <span className="flex items-center gap-2">
-            <MapPinIcon className="h-5 w-5 text-gold" />
-            {settings.serviceArea}
-          </span>
+        <div className="container-custom space-y-4">
+          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-white">
+            <span className="flex items-center gap-2">
+              <ClockIcon className="h-5 w-5 text-gold" />
+              We respond within 24 hours
+            </span>
+            <span className="flex items-center gap-2">
+              <MapPinIcon className="h-5 w-5 text-gold" />
+              {settings.serviceArea}
+            </span>
+          </div>
+          <SocialLinksBar />
         </div>
       </section>
 

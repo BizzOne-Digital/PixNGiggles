@@ -3,53 +3,22 @@ import { PhoneIcon, EnvelopeIcon, GlobeAltIcon } from '@heroicons/react/24/solid
 import { FOOTER_NAV_LINKS } from '../../utils/constants';
 import { useSettings } from '../../context/SettingsContext';
 import Logo from '../common/Logo';
+import SocialLinks from '../common/SocialLinks';
 
 const Footer = () => {
   const { settings } = useSettings();
-  const social = settings.socialLinks || {};
 
   return (
     <footer className="bg-black text-white">
       <div className="container-custom section-padding !py-12">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Logo light />
+            <Logo size="lg" />
             <p className="mt-4 text-sm leading-relaxed text-white/70">
               {settings.footer?.description ||
                 'Creating unforgettable photo booth experiences across Dallas–Fort Worth and surrounding areas.'}
             </p>
-            <div className="mt-5 flex gap-3">
-              {social.facebook && (
-                <a
-                  href={social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-bold hover:bg-gold hover:text-black transition-colors"
-                >
-                  f
-                </a>
-              )}
-              {social.instagram && (
-                <a
-                  href={social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-bold hover:bg-gold hover:text-black transition-colors"
-                >
-                  ig
-                </a>
-              )}
-              {social.tiktok && (
-                <a
-                  href={social.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-bold hover:bg-gold hover:text-black transition-colors"
-                >
-                  tk
-                </a>
-              )}
-            </div>
+            <SocialLinks className="mt-5" />
           </div>
 
           <div>

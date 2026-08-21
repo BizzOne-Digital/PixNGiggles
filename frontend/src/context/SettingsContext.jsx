@@ -10,6 +10,11 @@ const defaultSettings = {
   email: 'info@pixngiggles.com',
   website: 'pixngiggles.com',
   serviceArea: 'Dallas–Fort Worth, TX and surrounding areas',
+  socialLinks: {
+    facebook: 'https://facebook.com/pixngiggles',
+    instagram: 'https://instagram.com/pixngiggles',
+    whatsapp: 'https://wa.me/18177517818',
+  },
 };
 
 export const SettingsProvider = ({ children }) => {

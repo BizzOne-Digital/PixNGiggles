@@ -12,7 +12,7 @@ const gallerySchema = new mongoose.Schema(
     altText: { type: String, default: '' },
     category: {
       type: String,
-      enum: ['Weddings', 'Birthdays', 'Graduations', 'Corporate Events', 'Booth Setups', 'Custom Backdrops', 'All'],
+      enum: ['Weddings', 'Quinceañeras', 'Birthdays', 'Graduations', 'Corporate Events', 'Booth Setups', 'Custom Backdrops', 'All'],
       default: 'All',
     },
     image: imageSchema,

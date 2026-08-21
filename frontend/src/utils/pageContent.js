@@ -1,9 +1,4 @@
-export const STATS = [
-  { value: '500+', label: 'Events Hosted' },
-  { value: '50K+', label: 'Photos Captured' },
-  { value: '98%', label: 'Client Satisfaction' },
-  { value: '5+', label: 'Years in DFW' },
-];
+export const STATS = [];
 
 export const PROCESS_STEPS = [
   {
@@ -109,8 +104,9 @@ export const SERVICE_AREAS = [
 ];
 
 export const GALLERY_INTRO = {
-  Weddings: 'Romantic celebrations filled with love, laughter, and picture-perfect moments.',
-  Birthdays: 'Milestone birthdays and surprise parties captured with energy and style.',
+  Weddings: 'Elegant wedding celebrations with joyful guests and picture-perfect moments.',
+  'Quinceañeras': 'Beautiful quinceañera celebrations filled with tradition, color, and unforgettable memories.',
+  Birthdays: 'Milestone birthdays and teen celebrations captured with energy and style.',
   Graduations: 'Proud graduates and families celebrating achievements together.',
   'Corporate Events': 'Brand activations, conferences, and team events with professional polish.',
   'Booth Setups': 'Our premium booth configurations at real venues across DFW.',

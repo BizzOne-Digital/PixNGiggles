@@ -23,6 +23,7 @@ const siteSettingsSchema = new mongoose.Schema(
       twitter: { type: String, default: '' },
       tiktok: { type: String, default: '' },
       youtube: { type: String, default: '' },
+      whatsapp: { type: String, default: '' },
     },
     hero: {
       eyebrow: { type: String, default: "Dallas–Fort Worth's Premier Photo Booth Experience" },

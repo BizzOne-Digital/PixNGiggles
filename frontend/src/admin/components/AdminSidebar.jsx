@@ -5,6 +5,7 @@ import {
   QuestionMarkCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../../context/AuthContext';
+import Logo from '../../components/common/Logo';
 
 const navItems = [
   { name: 'Dashboard', path: '/admin/dashboard', icon: HomeIcon },
@@ -32,8 +33,8 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     <>
       {isOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onClose} />}
       <aside className={`fixed top-0 left-0 z-50 h-full w-64 bg-charcoal-light border-r border-white/10 transform transition-transform lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex h-16 items-center border-b border-white/10 px-6">
-          <span className="text-lg font-bold text-gradient-gold">PixNGiggles Admin</span>
+        <div className="flex h-16 items-center border-b border-white/10 px-4">
+          <Logo size="sm" linkTo="/admin/dashboard" />
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
           {navItems.map((item) => (

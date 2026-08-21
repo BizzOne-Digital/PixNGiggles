@@ -109,7 +109,7 @@ const SettingsManagement = () => {
         <section className="card-premium p-6 space-y-4">
           <h2 className="font-bold text-gold">Social Links</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            {['facebook', 'instagram', 'twitter', 'tiktok', 'youtube'].map((platform) => (
+            {['facebook', 'instagram', 'whatsapp', 'twitter', 'tiktok', 'youtube'].map((platform) => (
               <div key={platform}>
                 <label className="label-field capitalize">{platform}</label>
                 <input className="input-field" value={form.socialLinks?.[platform] || ''} onChange={(e) => setForm({ ...form, socialLinks: { ...form.socialLinks, [platform]: e.target.value } })} />

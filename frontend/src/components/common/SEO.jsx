@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const SEO = ({ title, description, image, url }) => {
   const siteTitle = title ? `${title} | PixNGiggles` : 'PixNGiggles | Premium Photo Booth Rentals in DFW';
   const siteDescription = description || 'PixNGiggles offers premium photo booth rentals for weddings, corporate events, and celebrations in Dallas–Fort Worth, Texas.';
-  const siteImage = image || 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80';
+  const siteImage = image || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=85&auto=format&fit=crop';
   const siteUrl = url || 'https://pixngiggles.com';
 
   useEffect(() => {

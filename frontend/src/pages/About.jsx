@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import SEO from '../components/common/SEO';
 import PageHero from '../components/common/PageHero';
-import StatsBar from '../components/common/StatsBar';
 import ProcessSteps from '../components/common/ProcessSteps';
 import WhyChooseUs from '../components/common/WhyChooseUs';
 import TestimonialsSection from '../components/common/TestimonialsSection';
@@ -23,8 +22,6 @@ const About = () => (
       scriptSuffix="Memories"
       subtitle="A premier photo booth provider dedicated to creating unforgettable experiences across the Dallas–Fort Worth metroplex."
     />
-    <StatsBar />
-
     {/* Our Story */}
     <section className="section-padding bg-white">
       <div className="container-custom">

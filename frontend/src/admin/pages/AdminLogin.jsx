@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 
+import Logo from '../../components/common/Logo';
+
 const AdminLogin = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -32,8 +34,8 @@ const AdminLogin = () => {
     <div className="min-h-screen flex items-center justify-center bg-charcoal px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gradient-gold">PixNGiggles</h1>
-          <p className="mt-2 text-white/60">Admin Panel</p>
+          <Logo size="lg" className="justify-center" linkTo="/" />
+          <p className="mt-3 text-white/60">Admin Panel</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="admin-panel rounded-lg border border-white/10 bg-charcoal-light p-8 space-y-5">
           <div>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/common/SEO';
 import PageHero from '../components/common/PageHero';
-import StatsBar from '../components/common/StatsBar';
 import TestimonialsSection from '../components/common/TestimonialsSection';
 import { CTASection } from '../components/common/SectionHeading';
 import SectionHeading from '../components/common/SectionHeading';
@@ -44,8 +43,6 @@ const Gallery = () => {
         scriptSuffix="Captured"
         subtitle="Browse real moments from weddings, corporate events, graduations, and celebrations across Dallas–Fort Worth."
       />
-      <StatsBar />
-
       {/* Featured strip */}
       {featured.length > 0 && (
         <section className="bg-white section-padding !pb-8">

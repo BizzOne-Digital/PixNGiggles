@@ -11,7 +11,6 @@ import {
 import Hero from './Hero';
 import LazyImage from '../common/LazyImage';
 import LoadingSpinner from '../common/LoadingSpinner';
-import StatsBar from '../common/StatsBar';
 import ProcessSteps from '../common/ProcessSteps';
 import WhyChooseUs from '../common/WhyChooseUs';
 import TestimonialsSection from '../common/TestimonialsSection';
@@ -62,7 +61,6 @@ const HomeSections = () => {
   return (
     <>
       <Hero />
-      <StatsBar />
 
       {/* About Us */}
       <section className="bg-white section-padding">
@@ -90,8 +88,8 @@ const HomeSections = () => {
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4">
               <div className="rounded-lg bg-gray-light p-4">
-                <p className="text-2xl font-extrabold text-gold">500+</p>
-                <p className="text-xs font-semibold uppercase text-gray-600">Events Hosted</p>
+                <p className="text-2xl font-extrabold text-gold">DFW</p>
+                <p className="text-xs font-semibold uppercase text-gray-600">Metroplex Coverage</p>
               </div>
               <div className="rounded-lg bg-gray-light p-4">
                 <p className="text-2xl font-extrabold text-gold">24hr</p>

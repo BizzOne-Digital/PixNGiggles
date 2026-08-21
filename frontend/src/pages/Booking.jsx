@@ -8,6 +8,7 @@ import PageHero from '../components/common/PageHero';
 import ProcessSteps from '../components/common/ProcessSteps';
 import WhatsIncluded from '../components/common/WhatsIncluded';
 import FAQSection from '../components/common/FAQSection';
+import { SocialLinksBar } from '../components/common/SocialLinks';
 import { bookingsAPI, addonsAPI } from '../services/api';
 import { EVENT_TYPES, BOOTH_OPTIONS, HEAR_ABOUT_OPTIONS } from '../utils/constants';
 import { useSettings } from '../context/SettingsContext';
@@ -173,19 +174,22 @@ const Booking = () => {
       />
 
       <section className="bg-black py-6">
-        <div className="container-custom flex flex-wrap items-center justify-center gap-6 text-sm text-white">
-          <a href={`tel:${settings.phone}`} className="flex items-center gap-2 hover:text-gold">
-            <PhoneIcon className="h-5 w-5 text-gold" />
-            {settings.phone}
-          </a>
-          <a href={`mailto:${settings.email}`} className="flex items-center gap-2 hover:text-gold">
-            <EnvelopeIcon className="h-5 w-5 text-gold" />
-            {settings.email}
-          </a>
-          <span className="flex items-center gap-2">
-            <ClockIcon className="h-5 w-5 text-gold" />
-            Response within 24 hours
-          </span>
+        <div className="container-custom space-y-4">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white">
+            <a href={`tel:${settings.phone}`} className="flex items-center gap-2 hover:text-gold">
+              <PhoneIcon className="h-5 w-5 text-gold" />
+              {settings.phone}
+            </a>
+            <a href={`mailto:${settings.email}`} className="flex items-center gap-2 hover:text-gold">
+              <EnvelopeIcon className="h-5 w-5 text-gold" />
+              {settings.email}
+            </a>
+            <span className="flex items-center gap-2">
+              <ClockIcon className="h-5 w-5 text-gold" />
+              Response within 24 hours
+            </span>
+          </div>
+          <SocialLinksBar />
         </div>
       </section>
 

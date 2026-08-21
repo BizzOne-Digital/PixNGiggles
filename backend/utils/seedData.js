@@ -7,20 +7,17 @@ import Service from '../models/Service.js';
 import Booth from '../models/Booth.js';
 import AddOn from '../models/AddOn.js';
 import Gallery from '../models/Gallery.js';
-import Testimonial from '../models/Testimonial.js';
 import FAQ from '../models/FAQ.js';
 import SiteSettings from '../models/SiteSettings.js';
+import { galleryImages, img, photo } from './contentData.js';
 
 dotenv.config();
-
-const img = (url) => ({ publicId: '', url, secureUrl: url });
 
 const seed = async () => {
   await connectDB();
 
   console.log('Seeding database...');
 
-  // Admin
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@pixngiggles.com';
   const adminPassword = process.env.ADMIN_PASSWORD || 'Admin123!';
   const existingAdmin = await Admin.findOne({ email: adminEmail });
@@ -30,26 +27,24 @@ const seed = async () => {
     console.log(`Admin created: ${adminEmail}`);
   }
 
-  // Site Settings
   const settingsCount = await SiteSettings.countDocuments();
   if (settingsCount === 0) {
     await SiteSettings.create({
       hero: {
         images: [
-          img('https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80'),
-          img('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80'),
+          img(photo('photo-1492684223066-81342ee5ff30')),
+          img(photo('photo-1529156069898-49953e39b3ac')),
         ],
       },
       socialLinks: {
-        instagram: 'https://instagram.com',
-        facebook: 'https://facebook.com',
-        tiktok: 'https://tiktok.com',
+        facebook: 'https://facebook.com/pixngiggles',
+        instagram: 'https://instagram.com/pixngiggles',
+        whatsapp: 'https://wa.me/18177517818',
       },
     });
     console.log('Site settings created');
   }
 
-  // Services
   if (await Service.countDocuments() === 0) {
     await Service.insertMany([
       {
@@ -59,7 +54,7 @@ const seed = async () => {
         description:
           'Make your wedding unforgettable with our premium photo booth experiences. From intimate rehearsal dinners to grand receptions, PixNGiggles captures every smile, laugh, and candid moment your guests create.',
         features: ['Weddings', 'Receptions', 'Rehearsal Dinners', 'Pre-Wedding Events', 'Custom Overlays', 'Instant Prints'],
-        image: img('https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80'),
+        image: img(photo('photo-1606800052052-08fe0c8d8b44')),
         displayOrder: 1,
       },
       {
@@ -69,7 +64,7 @@ const seed = async () => {
         description:
           'Elevate your corporate events with branded photo booth experiences that engage attendees and amplify your brand. Perfect for conferences, company celebrations, and client events.',
         features: ['Corporate Events', 'Conferences', 'Company Celebrations', 'Branded Overlays', 'Employee Events', 'Client Events'],
-        image: img('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'),
+        image: img(photo('photo-1540575467063-178a50c2df87')),
         displayOrder: 2,
       },
       {
@@ -77,16 +72,15 @@ const seed = async () => {
         slug: 'birthday-graduation-photo-booth',
         shortDescription: 'Celebrate milestones with fun, interactive photo experiences.',
         description:
-          'From milestone birthdays to graduation celebrations, our photo booths bring energy and excitement to every party. Guests love the interactive experience and instant keepsakes.',
-        features: ['Birthday Parties', 'Graduation Celebrations', 'Milestone Events', 'Family Celebrations', 'Themed Backdrops', 'Fun Props'],
-        image: img('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80'),
+          'From milestone birthdays and quinceañeras to graduation celebrations, our photo booths bring energy and excitement to every party. Guests love the interactive experience and instant keepsakes.',
+        features: ['Birthday Parties', 'Quinceañeras', 'Graduation Celebrations', 'Teen Parties', 'Family Celebrations', 'Themed Backdrops'],
+        image: img(photo('photo-1464349095432-e9a21285b5f3')),
         displayOrder: 3,
       },
     ]);
     console.log('Services created');
   }
 
-  // Booths
   if (await Booth.countDocuments() === 0) {
     await Booth.insertMany([
       {
@@ -104,7 +98,7 @@ const seed = async () => {
           'Custom overlays',
           'Custom backdrops',
         ],
-        image: img('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80'),
+        image: img(photo('photo-1492684223066-81342ee5ff30')),
         displayOrder: 1,
         isPremium: false,
       },
@@ -124,7 +118,7 @@ const seed = async () => {
           'Custom overlays',
           'Custom backdrops',
         ],
-        image: img('https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80'),
+        image: img(photo('photo-1511578314322-379afb476865')),
         displayOrder: 2,
         isPremium: true,
       },
@@ -132,7 +126,6 @@ const seed = async () => {
     console.log('Booths created');
   }
 
-  // Add-ons
   if (await AddOn.countDocuments() === 0) {
     await AddOn.insertMany([
       { name: 'Custom Photo Overlays', description: 'Personalized overlays featuring your event name, date, and custom graphics.', displayOrder: 1 },
@@ -145,19 +138,7 @@ const seed = async () => {
     console.log('Add-ons created');
   }
 
-  // Gallery
   if (await Gallery.countDocuments() === 0) {
-    const galleryImages = [
-      { title: 'Wedding Celebration', category: 'Weddings', altText: 'Guests enjoying the photo booth at a wedding', url: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80', featured: true },
-      { title: 'Reception Fun', category: 'Weddings', altText: 'Wedding reception photo booth moment', url: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&q=80', featured: true },
-      { title: 'Birthday Party', category: 'Birthdays', altText: 'Birthday party photo booth fun', url: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80', featured: false },
-      { title: 'Graduation Day', category: 'Graduations', altText: 'Graduation celebration photo booth', url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80', featured: false },
-      { title: 'Corporate Event', category: 'Corporate Events', altText: 'Corporate event photo booth setup', url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80', featured: true },
-      { title: 'Booth Setup', category: 'Booth Setups', altText: 'Premium photo booth setup at event', url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80', featured: false },
-      { title: 'Custom Backdrop', category: 'Custom Backdrops', altText: 'Custom themed backdrop at event', url: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80', featured: false },
-      { title: 'Event Highlights', category: 'Weddings', altText: 'Wedding guests posing at photo booth', url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&q=80', featured: false },
-    ];
-
     await Gallery.insertMany(
       galleryImages.map((g, i) => ({
         title: g.title,
@@ -171,35 +152,6 @@ const seed = async () => {
     console.log('Gallery created');
   }
 
-  // Testimonials
-  if (await Testimonial.countDocuments() === 0) {
-    await Testimonial.insertMany([
-      {
-        customerName: 'Sarah & Michael',
-        eventType: 'Wedding',
-        rating: 5,
-        review: 'PixNGiggles made our wedding reception absolutely magical! The Mirror X booth was the highlight of the night. Our guests couldn\'t stop talking about it, and we received hundreds of photos instantly.',
-        displayOrder: 1,
-      },
-      {
-        customerName: 'Jennifer Torres',
-        eventType: 'Corporate Event',
-        rating: 5,
-        review: 'We hired PixNGiggles for our annual company celebration and the branded overlays were perfect. Professional setup, seamless experience, and our team loved every moment.',
-        displayOrder: 2,
-      },
-      {
-        customerName: 'David Chen',
-        eventType: 'Graduation',
-        rating: 5,
-        review: 'The Cloee Ring Light booth was perfect for my daughter\'s graduation party. Easy to use, beautiful photos, and the team was incredibly professional from start to finish.',
-        displayOrder: 3,
-      },
-    ]);
-    console.log('Testimonials created');
-  }
-
-  // FAQs
   if (await FAQ.countDocuments() === 0) {
     await FAQ.insertMany([
       {
