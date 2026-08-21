@@ -6,6 +6,7 @@ import rateLimit from 'express-rate-limit';
 import connectDB from './config/db.js';
 import configureCloudinary from './config/cloudinary.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import { isAllowedOrigin } from './utils/cors.js';
 
 import authRoutes from './routes/authRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
@@ -24,15 +25,6 @@ configureCloudinary();
 
 const app = express();
 
-const getAllowedOrigins = () => {
-  const origins = new Set();
-  if (process.env.FRONTEND_URL) origins.add(process.env.FRONTEND_URL);
-  if (process.env.ALLOWED_ORIGINS) {
-    process.env.ALLOWED_ORIGINS.split(',').forEach((o) => origins.add(o.trim()));
-  }
-  return origins;
-};
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 200,
@@ -50,12 +42,8 @@ app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      const allowed = getAllowedOrigins();
-      if (allowed.has(origin)) return callback(null, true);
-      // Vercel preview/production frontend URLs
-      if (/^https:\/\/[\w-]+\.vercel\.app$/.test(origin)) return callback(null, true);
-      callback(new Error(`CORS blocked for origin: ${origin}`));
+      if (!origin || isAllowedOrigin(origin)) return callback(null, true);
+      callback(null, false);
     },
     credentials: true,
   })

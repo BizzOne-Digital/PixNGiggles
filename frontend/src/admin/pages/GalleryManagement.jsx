@@ -20,6 +20,7 @@ const GalleryManagement = () => {
   const [bulkImages, setBulkImages] = useState(null);
   const [bulkCategory, setBulkCategory] = useState('Weddings');
   const [submitting, setSubmitting] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0 });
 
   const fetch = () => {
     galleryAPI.getAll({ admin: 'true' })
@@ -60,19 +61,47 @@ const GalleryManagement = () => {
   const handleBulkUpload = async (e) => {
     e.preventDefault();
     if (!bulkImages?.length) { toast.error('Select images'); return; }
+
+    const files = Array.from(bulkImages);
+    if (files.length > 20) {
+      toast.error('Upload up to 20 images at a time');
+      return;
+    }
+
     setSubmitting(true);
-    try {
-      const formData = new FormData();
-      for (const file of bulkImages) formData.append('images', file);
-      formData.append('category', bulkCategory);
-      await galleryAPI.createMultiple(formData);
-      toast.success(`${bulkImages.length} images uploaded`);
+    setBulkProgress({ current: 0, total: files.length });
+
+    let uploaded = 0;
+    let failed = 0;
+
+    for (let i = 0; i < files.length; i += 1) {
+      const file = files[i];
+      try {
+        const formData = createFormData({
+          title: file.name.replace(/\.[^/.]+$/, ''),
+          altText: 'PixNGiggles event photo',
+          category: bulkCategory,
+          isFeatured: false,
+          isActive: true,
+        }, 'image', file);
+        await galleryAPI.create(formData);
+        uploaded += 1;
+      } catch {
+        failed += 1;
+      }
+      setBulkProgress({ current: i + 1, total: files.length });
+    }
+
+    setSubmitting(false);
+    setBulkProgress({ current: 0, total: 0 });
+
+    if (uploaded > 0) {
+      toast.success(`${uploaded} image(s) uploaded`);
       setBulkOpen(false);
       fetch();
-    } catch {
-      toast.error('Bulk upload failed');
-    } finally {
-      setSubmitting(false);
+    }
+    if (failed > 0) {
+      toast.error(`${failed} image(s) failed — try smaller files (max 8MB each)`);
     }
   };
 
@@ -140,8 +169,15 @@ const GalleryManagement = () => {
               {GALLERY_CATEGORIES.filter(c => c !== 'All').map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div><label className="label-field">Images (multiple)</label><input type="file" accept="image/*" multiple onChange={(e) => setBulkImages(e.target.files)} className="text-sm text-white/70" /></div>
-          <button type="submit" disabled={submitting} className="btn-primary">{submitting ? 'Uploading...' : 'Upload All'}</button>
+          <div><label className="label-field">Images (multiple, max 20 — 8MB each)</label><input type="file" accept="image/*" multiple onChange={(e) => setBulkImages(e.target.files)} className="text-sm text-white/70" /></div>
+          {submitting && bulkProgress.total > 0 && (
+            <p className="text-sm text-white/70">
+              Uploading {bulkProgress.current} of {bulkProgress.total}...
+            </p>
+          )}
+          <button type="submit" disabled={submitting} className="btn-primary">
+            {submitting ? `Uploading (${bulkProgress.current}/${bulkProgress.total || '...'})` : 'Upload All'}
+          </button>
         </form>
       </Modal>
 

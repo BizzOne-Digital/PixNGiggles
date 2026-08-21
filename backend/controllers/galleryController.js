@@ -43,7 +43,7 @@ export const createMultipleGalleryItems = asyncHandler(async (req, res) => {
     throw new Error('At least one image is required');
   }
 
-  const { category = 'All', altText = '' } = req.body;
+  const { category = 'Weddings', altText = '' } = req.body;
   const items = [];
 
   for (const file of req.files) {
