@@ -37,8 +37,6 @@ const seed = async () => {
         ],
       },
       socialLinks: {
-        facebook: 'https://www.facebook.com/share/1CPKe9cZUN/',
-        instagram: 'https://www.instagram.com/pixngiggles_',
         whatsapp: 'https://wa.me/18177517818',
       },
     });
