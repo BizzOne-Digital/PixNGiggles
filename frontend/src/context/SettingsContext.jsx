@@ -11,6 +11,8 @@ const defaultSettings = {
   website: 'pixngiggles.com',
   serviceArea: 'Dallas–Fort Worth, TX and surrounding areas',
   socialLinks: {
+    facebook: 'https://www.facebook.com/share/1CPKe9cZUN/',
+    instagram: 'https://www.instagram.com/pixngiggles_',
     whatsapp: 'https://wa.me/18177517818',
   },
 };
