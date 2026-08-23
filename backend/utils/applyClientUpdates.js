@@ -61,8 +61,8 @@ const applyClientUpdates = async () => {
   if (settings) {
     settings.socialLinks = {
       ...settings.socialLinks,
-      facebook: settings.socialLinks?.facebook || 'https://facebook.com/pixngiggles',
-      instagram: settings.socialLinks?.instagram || 'https://instagram.com/pixngiggles',
+      facebook: '',
+      instagram: '',
       whatsapp: settings.socialLinks?.whatsapp || 'https://wa.me/18177517818',
     };
     if (settings.hero?.images?.length) {

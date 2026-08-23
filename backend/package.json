@@ -10,6 +10,7 @@
     "seed": "node utils/seedData.js",
     "apply-updates": "node utils/applyClientUpdates.js",
     "import-gallery": "node utils/importLocalGallery.js",
+    "clear-social": "node utils/clearSocialLinks.js",
     "vercel-build": "echo \"No build step required\""
   },
   "dependencies": {
