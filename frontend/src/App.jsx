@@ -8,6 +8,7 @@ import LoadingSpinner from './components/common/LoadingSpinner';
 import ScrollToTop from './components/common/ScrollToTop';
 import ProtectedRoute from './admin/routes/ProtectedRoute';
 import AdminLogin from './admin/pages/AdminLogin';
+import ComingSoon from './pages/ComingSoon';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -45,15 +46,14 @@ function App() {
           />
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route element={<MainLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/booths" element={<Booths />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/booking" element={<Booking />} />
-                <Route path="/contact" element={<Contact />} />
-              </Route>
+              <Route path="/" element={<ComingSoon />} />
+              <Route path="/about" element={<ComingSoon />} />
+              <Route path="/services" element={<ComingSoon />} />
+              <Route path="/booths" element={<ComingSoon />} />
+              <Route path="/gallery" element={<ComingSoon />} />
+              <Route path="/booking" element={<ComingSoon />} />
+              <Route path="/contact" element={<ComingSoon />} />
+              <Route path="*" element={<ComingSoon />} />
 
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
