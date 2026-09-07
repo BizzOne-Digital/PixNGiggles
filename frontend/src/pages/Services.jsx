@@ -44,7 +44,7 @@ const Services = () => {
           <SectionHeading
             centered
             title="Events We Specialize In"
-            subtitle="Every package includes a professional attendant, unlimited sessions, digital sharing, printed photos, and full setup."
+            subtitle="Every package includes a professional attendant, unlimited sessions, digital sharing, and full setup."
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {['Weddings', 'Corporate Events', 'Graduations', 'Private Parties'].map((type) => (
