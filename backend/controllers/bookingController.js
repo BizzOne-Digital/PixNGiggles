@@ -1,8 +1,10 @@
 import Booking from '../models/Booking.js';
 import { asyncHandler } from '../utils/helpers.js';
+import { sendBookingNotification } from '../services/emailService.js';
 
 export const createBooking = asyncHandler(async (req, res) => {
   const booking = await Booking.create(req.body);
+  sendBookingNotification(booking).catch((err) => console.error('Booking email notification failed', err));
   res.status(201).json({ success: true, data: booking, message: 'Booking inquiry submitted successfully' });
 });
 

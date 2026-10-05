@@ -1,8 +1,10 @@
 import Contact from '../models/Contact.js';
 import { asyncHandler } from '../utils/helpers.js';
+import { sendContactNotification } from '../services/emailService.js';
 
 export const createContact = asyncHandler(async (req, res) => {
   const contact = await Contact.create(req.body);
+  sendContactNotification(contact).catch((err) => console.error('Contact email notification failed', err));
   res.status(201).json({ success: true, data: contact, message: 'Message sent successfully' });
 });
 
