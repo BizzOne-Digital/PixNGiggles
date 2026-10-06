@@ -50,7 +50,7 @@ export const BookingForm = ({ className = '' }) => {
         </div>
         <h3 className="text-2xl font-bold text-charcoal">Thank You!</h3>
         <p className="mt-3 text-gray-600">
-          Your booking inquiry has been received. Our team will contact you within 24 hours.
+          We&apos;ve received your inquiry and will get back to you within 24 hours.
         </p>
         <button onClick={() => setSubmitted(false)} className="btn-outline-dark mt-6">Submit Another Inquiry</button>
       </div>
