@@ -20,7 +20,13 @@ const getTransporter = () => {
 const sendNotificationEmail = async ({ subject, html }) => {
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
     console.warn('SMTP not configured — skipping email notification');
-    return;
+    return {
+      configured: false,
+      hasHost: Boolean(process.env.SMTP_HOST),
+      hasUser: Boolean(process.env.SMTP_USER),
+      hasPassword: Boolean(process.env.SMTP_PASSWORD),
+      notifyEmail: process.env.NOTIFY_EMAIL || null,
+    };
   }
 
   const recipient = process.env.NOTIFY_EMAIL || process.env.SMTP_USER;
