@@ -4,12 +4,16 @@ import { sendContactNotification } from '../services/emailService.js';
 
 export const createContact = asyncHandler(async (req, res) => {
   const contact = await Contact.create(req.body);
+  let emailDebug;
   try {
-    await sendContactNotification(contact);
+    emailDebug = await sendContactNotification(contact);
   } catch (err) {
     console.error('Contact email notification failed', err);
+    emailDebug = { error: err.message };
   }
-  res.status(201).json({ success: true, data: contact, message: 'Message sent successfully' });
+  const payload = { success: true, data: contact, message: 'Message sent successfully' };
+  if (req.query.debug === 'true') payload.emailDebug = emailDebug;
+  res.status(201).json(payload);
 });
 
 export const getContacts = asyncHandler(async (req, res) => {

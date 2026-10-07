@@ -30,13 +30,15 @@ const sendNotificationEmail = async ({ subject, html }) => {
     subject,
     html,
   });
-  console.log('Email notification result', {
+  const result = {
     recipient,
     accepted: info.accepted,
     rejected: info.rejected,
     response: info.response,
     messageId: info.messageId,
-  });
+  };
+  console.log('Email notification result', result);
+  return result;
 };
 
 export const sendBookingNotification = (booking) =>
