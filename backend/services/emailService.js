@@ -23,11 +23,19 @@ const sendNotificationEmail = async ({ subject, html }) => {
     return;
   }
 
-  await getTransporter().sendMail({
+  const recipient = process.env.NOTIFY_EMAIL || process.env.SMTP_USER;
+  const info = await getTransporter().sendMail({
     from: `"PixNGiggles Website" <${process.env.SMTP_USER}>`,
-    to: process.env.NOTIFY_EMAIL || process.env.SMTP_USER,
+    to: recipient,
     subject,
     html,
+  });
+  console.log('Email notification result', {
+    recipient,
+    accepted: info.accepted,
+    rejected: info.rejected,
+    response: info.response,
+    messageId: info.messageId,
   });
 };
 
