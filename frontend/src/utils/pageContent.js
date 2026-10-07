@@ -91,7 +91,6 @@ export const WHATS_INCLUDED = [
   'Professional on-site attendant',
   'Unlimited photo sessions',
   'Instant digital sharing (SMS & QR)',
-  'High-quality printed photos',
   'Custom overlay design',
   'Setup and breakdown',
   'Prop collection',
