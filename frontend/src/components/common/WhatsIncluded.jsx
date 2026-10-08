@@ -9,7 +9,7 @@ const WhatsIncluded = ({ bg = 'gray' }) => (
         eyebrow="Packages"
         title="What's"
         scriptSuffix="Included"
-        subtitle="Every PixNGiggles package is designed to deliver a complete, premium photo booth experience."
+        subtitle="Every PixNGiggles package is designed to deliver a complete, premium photo booth experience. Digital sharing is included with every package; printed photos are available as an add-on."
       />
       <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-2">
         {WHATS_INCLUDED.map((item) => (
