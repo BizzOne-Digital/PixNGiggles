@@ -11,7 +11,7 @@ const Hero = () => {
   const hero = settings.hero || {};
 
   const features = [
-    { icon: CameraIcon, label: 'Digital & Printed Photos' },
+    { icon: CameraIcon, label: 'Digital Sharing & Optional Prints' },
     { icon: DevicePhoneMobileIcon, label: 'SMS & QR Code Sharing' },
     { icon: PhotoIcon, label: 'Custom Overlays & Backdrops' },
   ];

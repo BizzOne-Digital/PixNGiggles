@@ -19,7 +19,7 @@ export const PROCESS_STEPS = [
   {
     step: '04',
     title: 'Relive Every Moment',
-    description: 'Guests receive instant digital shares via SMS and QR code, plus beautiful printed keepsakes to treasure forever.',
+    description: 'Guests receive instant digital shares via SMS and QR code, with printed keepsakes available as an add-on.',
   },
 ];
 
@@ -46,7 +46,7 @@ export const WHY_CHOOSE_US = [
   },
   {
     title: 'All-Inclusive Packages',
-    description: 'Setup, breakdown, unlimited sessions, digital gallery access, and printed photos — no hidden fees.',
+    description: 'Setup, breakdown, unlimited sessions, and digital gallery access — no hidden fees.',
   },
 ];
 

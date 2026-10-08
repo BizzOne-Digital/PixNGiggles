@@ -84,7 +84,7 @@ const HomeSections = () => {
               PixNGiggles is a premier photo booth provider serving the Dallas–Fort Worth area. We specialize in creating unforgettable experiences that capture the joy and laughter of your most special moments.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
-              From elegant weddings to dynamic corporate events, our professional setups engage guests and deliver high-quality digital and printed keepsakes.
+              From elegant weddings to dynamic corporate events, our professional setups engage guests and deliver high-quality digital keepsakes, with printed options available.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4">
               <div className="rounded-lg bg-gray-light p-4">
