@@ -21,7 +21,7 @@ const Hero = () => {
       <img
         src="/images/hero.png"
         alt="PixNGiggles photo booth at a Dallas event"
-        className="absolute inset-0 h-full w-full object-cover object-[85%_center] sm:object-center"
+        className="absolute inset-0 h-full w-full object-cover object-[63%_center] sm:object-center"
         fetchPriority="high"
         decoding="async"
       />
