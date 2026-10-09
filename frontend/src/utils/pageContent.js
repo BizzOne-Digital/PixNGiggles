@@ -45,7 +45,7 @@ export const WHY_CHOOSE_US = [
     description: 'Serving Dallas, Fort Worth, Plano, Arlington, Frisco, and the entire Dallas–Fort Worth metroplex.',
   },
   {
-    title: 'All-Inclusive Packages',
+    title: 'Transparent Packages',
     description: 'Setup, breakdown, unlimited sessions, and digital gallery access — no hidden fees.',
   },
 ];

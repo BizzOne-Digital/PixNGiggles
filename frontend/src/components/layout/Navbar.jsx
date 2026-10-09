@@ -53,13 +53,22 @@ const Navbar = ({ variant = 'default' }) => {
           </a>
         </div>
 
-        <button
-          className={`rounded-lg p-2 lg:hidden ${isHero ? 'text-white' : 'text-white'}`}
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-1 lg:hidden">
+          <a
+            href={`tel:${settings.phone}`}
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-gold"
+            aria-label={`Call ${settings.phone}`}
+          >
+            <PhoneIcon className="h-5 w-5" />
+          </a>
+          <button
+            className={`flex h-11 w-11 items-center justify-center rounded-lg ${isHero ? 'text-white' : 'text-white'}`}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
 
       {isOpen && (

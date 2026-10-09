@@ -18,6 +18,7 @@ const Booths = () => {
   const [booths, setBooths] = useState([]);
   const [addons, setAddons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
     Promise.all([boothsAPI.getAll(), addonsAPI.getAll()])
@@ -47,12 +48,19 @@ const Booths = () => {
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
               {booths.map((booth) => (
                 <div key={booth._id} className="card-premium overflow-hidden">
-                  <LazyImage
-                    src={booth.image}
-                    alt={booth.title}
-                    className="h-64 w-full object-cover sm:h-72"
-                    width={1000}
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox(booth)}
+                    className="block w-full cursor-zoom-in bg-gray-light"
+                    aria-label={`View full-size image of ${booth.title}`}
+                  >
+                    <LazyImage
+                      src={booth.image}
+                      alt={booth.title}
+                      className="h-80 w-full object-contain sm:h-96"
+                      width={1000}
+                    />
+                  </button>
                   <div className="p-6 sm:p-8">
                     <div className="flex flex-row items-start gap-5">
                       <div className="min-w-0 flex-1">
@@ -144,6 +152,28 @@ const Booths = () => {
       <TestimonialsSection limit={3} bg="gray" />
       <FAQSection limit={4} bg="white" title="Booth Questions" />
       <CTASection title="Not Sure Which Booth Is Right for You?" subtitle="Our team will help you choose the perfect option." />
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+            aria-label="Close"
+          >
+            <XMarkIcon className="h-6 w-6" />
+          </button>
+          <LazyImage
+            src={lightbox.image}
+            alt={lightbox.title}
+            className="max-h-full max-w-full object-contain"
+            width={1600}
+          />
+        </div>
+      )}
     </>
   );
 };

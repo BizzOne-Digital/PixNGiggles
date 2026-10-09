@@ -21,16 +21,17 @@ const Hero = () => {
       <img
         src="/images/hero.png"
         alt="PixNGiggles photo booth at a Dallas event"
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-[85%_center] sm:object-center"
         fetchPriority="high"
         decoding="async"
       />
       <div className="absolute inset-0 bg-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent sm:hidden" />
 
       {/* Hero text — left aligned, vertically centered in main area */}
       <div className="relative z-10 flex flex-1 items-center">
         <div className="container-custom w-full px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24">
-          <div className="max-w-lg text-left animate-fade-in-up">
+          <div className="max-w-[75%] text-left animate-fade-in-up sm:max-w-lg">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold">
               Dallas–Fort Worth&apos;s Premier
             </p>

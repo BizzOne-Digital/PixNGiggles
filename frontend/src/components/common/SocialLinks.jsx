@@ -35,7 +35,7 @@ const SocialLinks = ({ className = '', iconClass = '' }) => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.label}
-          className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white transition-colors hover:bg-gold hover:text-black ${iconClass}`}
+          className={`flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white transition-colors hover:bg-gold hover:text-black ${iconClass}`}
         >
           {link.icon === 'whatsapp' ? <WhatsAppIcon /> : link.text}
         </a>
