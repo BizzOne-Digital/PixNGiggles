@@ -17,30 +17,23 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative flex flex-col overflow-hidden bg-black sm:h-screen sm:min-h-[600px]">
-      {/* Mobile gets its own full-booth composition; desktop keeps the original background. */}
-      <picture className="relative order-2 mx-auto block w-full max-w-sm sm:absolute sm:inset-0 sm:order-none sm:max-w-none">
-        <source
-          media="(max-width: 639px)"
-          srcSet="/images/hero-mobile.png"
-          width="1122"
-          height="1402"
-        />
+    <section className="relative flex h-screen min-h-[600px] flex-col overflow-hidden bg-black">
+      <picture className="absolute inset-0 block">
+        <source media="(max-width: 639px)" srcSet="/images/hero-mobile.png" />
         <img
           src="/images/hero.png"
           alt="PixNGiggles photo booth at a Dallas event"
-          width="1672"
-          height="941"
-          className="block h-auto w-full object-contain sm:h-full sm:object-cover sm:object-center"
+          className="h-full w-full object-cover object-center"
           fetchPriority="high"
           decoding="async"
         />
       </picture>
-      <div className="absolute inset-0 hidden bg-black/45 sm:block" />
+      <div className="absolute inset-0 bg-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent sm:hidden" />
 
       {/* Hero text — left aligned, vertically centered in main area */}
-      <div className="relative z-10 order-1 flex shrink-0 items-center sm:order-none sm:flex-1">
-        <div className="container-custom w-full px-4 sm:px-6 lg:px-8 pt-24 pb-6 sm:pt-20 sm:pb-0 lg:pt-24">
+      <div className="relative z-10 flex flex-1 items-center">
+        <div className="container-custom w-full px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24">
           <div className="max-w-lg text-left animate-fade-in-up">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold">
               Dallas–Fort Worth&apos;s Premier
@@ -69,7 +62,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom feature bar — bg image continues behind */}
-      <div className="relative z-10 order-3 shrink-0 border-t sm:order-none border-white/15 bg-black/40 backdrop-blur-[2px]">
+      <div className="relative z-10 shrink-0 border-t border-white/15 bg-black/40 backdrop-blur-[2px]">
         <div className="container-custom px-4 py-5 sm:px-6 lg:px-8">
           <div className="grid gap-4 sm:grid-cols-3">
             {features.map(({ icon: Icon, label }) => (
