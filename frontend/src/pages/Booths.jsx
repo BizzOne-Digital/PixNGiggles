@@ -13,6 +13,7 @@ import LazyImage from '../components/common/LazyImage';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { boothsAPI, addonsAPI } from '../services/api';
 import { BOOTH_COMPARISON } from '../utils/pageContent';
+import { getBoothImage } from '../utils/helpers';
 
 const Booths = () => {
   const [booths, setBooths] = useState([]);
@@ -55,7 +56,7 @@ const Booths = () => {
                     aria-label={`View full-size image of ${booth.title}`}
                   >
                     <LazyImage
-                      src={booth.image}
+                      src={getBoothImage(booth)}
                       alt={booth.title}
                       className="h-80 w-full object-contain sm:h-96"
                       width={1000}
@@ -167,7 +168,7 @@ const Booths = () => {
             <XMarkIcon className="h-6 w-6" />
           </button>
           <LazyImage
-            src={lightbox.image}
+            src={getBoothImage(lightbox)}
             alt={lightbox.title}
             className="max-h-full max-w-full object-contain"
             width={1600}

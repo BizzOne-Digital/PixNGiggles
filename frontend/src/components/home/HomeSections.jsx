@@ -161,11 +161,11 @@ const HomeSections = () => {
           {booths.map((booth) => (
             <div key={booth._id} className="card-premium p-6">
               <div className="flex flex-row items-start gap-5 sm:gap-6">
-                <div className="shrink-0 w-32 sm:w-40">
+                <div className="flex h-40 w-32 shrink-0 items-center justify-center bg-gray-light sm:h-48 sm:w-40">
                   <LazyImage
                     src={booth.image}
                     alt={booth.title}
-                    className="h-auto w-full object-contain"
+                    className="h-full w-full object-contain"
                     width={600}
                   />
                 </div>

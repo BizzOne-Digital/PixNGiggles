@@ -1,3 +1,8 @@
+export const getBoothImage = (booth) => {
+  const isMirrorX = booth.slug === 'mirror-x-luxury-photo-booth' || /mirror\s*x/i.test(booth.title || '');
+  return isMirrorX ? '/images/mirror-x.png' : booth.image;
+};
+
 export const getImageUrl = (image, width = 800) => {
   if (!image) return '';
   const url = image.secureUrl || image.url;
