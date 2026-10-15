@@ -51,7 +51,7 @@ const Hero = () => {
             </p>
             <div className="mt-8 flex flex-wrap justify-start gap-4">
               <Link to="/booking" className="btn-primary">
-                Get Instant Quote
+                Get a Quote
               </Link>
               <Link to="/services" className="btn-outline">
                 Our Services
